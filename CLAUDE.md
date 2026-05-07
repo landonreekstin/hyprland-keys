@@ -59,9 +59,40 @@ hyprland-keys   # launched by SUPER+/
 ## Nix integration (nixos-config)
 
 - Package defined in `nixos-config/modules/home-manager/scripts/hyprland-keys.nix`
-- Source path: `/home/lando/hyprland-keys` (absolute, requires `--impure`)
-- Future: change src to `fetchFromGitHub` once published
+- Source is pinned via `fetchFromGitHub` — CI-safe and fully reproducible
 - CSS location at runtime: `$HYPRLAND_KEYS_STYLE` env var (set by Nix wrapper)
+
+## Updating the pinned version in nixos-config
+
+After pushing changes to this repo, bump the pin in nixos-config:
+
+```bash
+# 1. Get the new commit SHA
+git rev-parse HEAD
+
+# 2. Fetch and hash the archive
+nix-prefetch-url --unpack \
+  https://github.com/landonreekstin/hyprland-keys/archive/<SHA>.tar.gz
+
+# 3. Convert to SRI format
+nix hash convert --hash-algo sha256 --to sri <base32-hash>
+
+# 4. Update rev + hash in:
+#    nixos-config/modules/home-manager/scripts/hyprland-keys.nix
+
+# 5. Eval-check all hosts, then commit + push nixos-config
+```
+
+Or as a one-liner from inside the nixos-config repo:
+
+```bash
+SHA=$(cd /home/lando/hyprland-keys && git rev-parse HEAD)
+HASH=$(nix-prefetch-url --unpack \
+  https://github.com/landonreekstin/hyprland-keys/archive/${SHA}.tar.gz 2>/dev/null \
+  | xargs -I{} nix hash convert --hash-algo sha256 --to sri {})
+echo "rev: $SHA"
+echo "hash: $HASH"
+```
 
 ## Adding / changing keybind descriptions
 
