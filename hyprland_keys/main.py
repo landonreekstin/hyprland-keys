@@ -10,11 +10,15 @@ from .ui.overlay_window import OverlayWindow
 
 
 def _load_css():
-    css_path = os.path.join(os.path.dirname(__file__), "..", "style.css")
-    css_path = os.path.realpath(css_path)
+    # 1. Env var set by Nix wrapper (most reliable when installed)
+    css_path = os.environ.get("HYPRLAND_KEYS_STYLE", "")
 
-    # Also check next to the installed binary
+    if not css_path or not os.path.exists(css_path):
+        # 2. Relative to source file (works in dev/source tree)
+        css_path = os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "style.css"))
+
     if not os.path.exists(css_path):
+        # 3. Relative to installed binary ($out/bin/../lib/hyprland-keys/style.css)
         script_dir = os.path.dirname(os.path.realpath(sys.argv[0]))
         css_path = os.path.join(script_dir, "..", "lib", "hyprland-keys", "style.css")
 
