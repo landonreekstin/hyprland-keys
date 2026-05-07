@@ -165,7 +165,7 @@ class BindList(Gtk.Box):
         elif self._active_mods:
             self._status.set_label(f"Modifier: {modifiers_label(self._active_mods)}")
         elif self._search:
-            self._status.set_label(f"Search: "{self._search}"  —  {len(filtered)} results")
+            self._status.set_label(f'Search: \"{self._search}\"  \u2014  {len(filtered)} results')
         else:
             self._status.set_label(f"{len(filtered)} keybinds")
 
