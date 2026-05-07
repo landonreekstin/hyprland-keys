@@ -181,6 +181,7 @@ class OverlayWindow(Gtk.ApplicationWindow):
 
     def _setup_controllers(self):
         key_ctrl = Gtk.EventControllerKey()
+        key_ctrl.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
         key_ctrl.connect("key-pressed",  self._on_key_pressed)
         key_ctrl.connect("key-released", self._on_key_released)
         self.add_controller(key_ctrl)

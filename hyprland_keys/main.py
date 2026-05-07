@@ -43,3 +43,7 @@ def _on_activate(app):
     binds = get_binds()
     win = OverlayWindow(app, binds)
     win.present()
+
+
+if __name__ == "__main__":
+    main()
