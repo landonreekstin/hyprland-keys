@@ -50,6 +50,8 @@ ROW_ZXCV = [
     Key("B",    "b",  1.0), Key("N", "n", 1.0), Key("M", "m", 1.0),
     Key(",",    "comma",       1.0), Key(".", "period", 1.0), Key("/", "slash", 1.0),
     Key("Shift","shift_r",     2.75),
+    Key("",     None,          0.5),
+    Key("↑",    "up",          1.0),
 ]
 
 ROW_BOTTOM = [
@@ -61,6 +63,9 @@ ROW_BOTTOM = [
     Key("Fn",    "fn",       1.0),
     Key("Menu",  "menu",     1.0),
     Key("Ctrl",  "ctrl_r",   1.25),
+    Key("←",     "left",     1.0),
+    Key("↓",     "down",     1.0),
+    Key("→",     "right",    1.0),
 ]
 
 ROWS = [ROW_FN, ROW_NUM, ROW_QWERTY, ROW_ASDF, ROW_ZXCV, ROW_BOTTOM]

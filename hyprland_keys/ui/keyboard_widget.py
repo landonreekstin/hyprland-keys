@@ -35,7 +35,7 @@ class KeyboardWidget(Gtk.DrawingArea):
         self.set_draw_func(self._draw)
         self.set_hexpand(True)
         self.set_vexpand(True)
-        self.set_size_request(820, 320)
+        self.set_size_request(960, 320)
 
         # State
         self.active_mods: set = set()     # {"super", "shift", ...}
@@ -107,7 +107,7 @@ class KeyboardWidget(Gtk.DrawingArea):
         self._draw_keys(cr)
 
     def _calculate_layout(self, total_w, total_h):
-        keyboard_w = 15 * KEY_UNIT
+        keyboard_w = max(sum(k.width for k in row) for row in ROWS) * KEY_UNIT
         rows_count  = len(ROWS)
         keyboard_h  = rows_count * (KEY_HEIGHT + KEY_GAP) + FN_ROW_GAP
 
