@@ -1,6 +1,7 @@
 # ~/hyprland-keys/hyprland_keys/ui/overlay_window.py
 # Main application window: full-screen overlay with keyboard + bind list.
 import os
+import subprocess
 import gi
 gi.require_version("Gtk", "4.0")
 gi.require_version("Gdk", "4.0")
@@ -91,6 +92,11 @@ class OverlayWindow(Gtk.ApplicationWindow):
         # Populate with all binds on start
         self._bind_list.set_binds(binds)
         self._update_state()
+
+        # Disable Hyprland keybinds while open so the user can explore safely
+        subprocess.run(["hyprctl", "dispatch", "submap", "hyprland-keys"],
+                       check=False, capture_output=True)
+        self.connect("destroy", self._on_destroy)
 
     # ------------------------------------------------------------------
     # Window setup
@@ -212,6 +218,10 @@ class OverlayWindow(Gtk.ApplicationWindow):
     # ------------------------------------------------------------------
     # Event handlers
     # ------------------------------------------------------------------
+
+    def _on_destroy(self, _win):
+        subprocess.run(["hyprctl", "dispatch", "submap", "reset"],
+                       check=False, capture_output=True)
 
     def _on_key_pressed(self, ctrl, keyval, keycode, state) -> bool:
         # Close on Escape
