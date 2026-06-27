@@ -50,8 +50,13 @@ _EXEC_PATTERNS = [
     ("cycle-audio-sink next",           "Cycle Audio Output →"),
     ("cycle-audio-sink prev",           "Cycle Audio Output ←"),
     ("toggle-monitor",                  "Toggle Display"),
+    ("toggle-launchbar",                "Toggle Launchbar"),
+    ("move-to-new-ws-on-monitor",       "Move to New Workspace"),
     ("waybar",                          "Restart Waybar"),
     ("cosmic-files",                    "File Manager (GUI)"),
+    ("vesktop",                         "Discord (Vesktop)"),
+    ("signal-desktop",                  "Signal"),
+    ("discord",                         "Discord"),
 ]
 
 # Dispatcher → description (dispatcher, arg) keyed lookup
