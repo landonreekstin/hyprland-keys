@@ -53,7 +53,7 @@ _EXEC_PATTERNS = [
     ("toggle-launchbar",                "Toggle Launchbar"),
     ("move-to-new-ws-on-monitor",       "Move to New Workspace"),
     ("waybar",                          "Restart Waybar"),
-    ("cosmic-files",                    "File Manager (GUI)"),
+    ("dolphin",                         "File Manager (GUI)"),
     ("vesktop",                         "Discord (Vesktop)"),
     ("signal-desktop",                  "Signal"),
     ("discord",                         "Discord"),
